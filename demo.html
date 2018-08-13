@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js" ></script>
+</head>
+<style>
+body,html{ margin: 0; padding: 0;}
+ul,ol{ margin: 0; padding: 0; list-style: none;}
+.autoPlay img{ width: 500px; height: 330px;}
+.banner{ width: 500px; margin: 50px auto; }
+.autoPlay{ position: relative; width: 500px; height: 330px; border: 1px solid #ddd; overflow: hidden;}
+.autoPlay ol{ position: absolute; bottom: 10px; right: 10px; z-index: 2;}
+.autoPlay ol li{ float: left; width: 30px; height: 30px; background: coral; color: #fff; text-decoration: none; line-height: 30px; text-align: center; margin: 0 5px; border: 1px solid #ddd;}
+.autoPlay ol .active{ background: red;}
+.autoPlay ul{ position: absolute;}
+</style>
+<script>
+$(function(){
+	var iNow=0;
+	autoPlay();
+	var timer=null;
+	$('.autoPlay ol').find('li').mouseover(function(){
+		$(this).attr('class','active').siblings().attr('class','');
+		var index=$(this).index();
+		$('.autoPlay ul').animate({top:-(index*$('.autoPlay').height())},1000);
+		clearInterval(timer);
+	}).mouseout(autoPlay);
+	
+	function autoPlay(){
+		timer=setInterval(function(){
+			if(iNow==$('.autoPlay ol').find('li').length-1){
+				iNow=0;
+			}else{
+				iNow++;
+			}
+			$('.autoPlay ol').find('li').eq(iNow).attr('class','active').siblings().attr('class','');
+			$('.autoPlay ul').animate({top:-(iNow*$('.autoPlay').height())},1000);
+		},2000);
+	};		
+})
+</script>
+<body>
+<div class="banner">
+	<div class="autoPlay">
+		<ol>
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+		<ul>
+			<li><img src="images/2.jpg"></li>
+			<li><img src="images/3.jpg"></li>
+			<li><img src="images/5.jpg"></li>
+			<li><img src="images/6.jpg"></li>
+			<li><img src="images/7.jpg"></li>
+		</ul>
+	</div>
+</div>	
+</body>
+</html>
