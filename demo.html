@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+</head>
+<style>
+ul,ol{ margin: 0; padding: 0; list-style: none;}
+.box{ width: 500px; height: 330px; position: relative; margin: 20px auto; border: 1px solid #7B7B7B;}
+.box img{ width: 500px; height: 330px;}
+.box ol{ position: absolute; bottom: 10px; right: 10px;}
+.box ol li{ float: left; width: 40px; height: 28px; margin: 0 5px; background: #ff8048; color: #fff; text-align: center; line-height: 28px;}
+.box ol .active{ background: #f55008;}
+.box ul{ width: 500px; height: 330px; position: relative; overflow: hidden;}
+.box ul li{ position: absolute; top: 0; left: 0; width: 500px; height: 330px;}
+</style>
+<script>
+$(function(){
+	var $oli=$('.box ol li');
+	var $uli=$('.box ul li');
+	var oneWidth=$uli.width();
+	var iNow=0;
+	var timer=null;
+	$uli.slice(1).css('left',oneWidth+1);
+		
+	$oli.mouseover(function(){
+		clearTimeout(timer);
+		var index=$(this).index();
+		timer=setTimeout($.proxy(function(){
+			$(this).attr('class','active').siblings().attr('class','');
+			if(iNow<index){
+				$uli.eq(index).animate({left:0},400);
+				$uli.eq(iNow).animate({left:-oneWidth},400);
+			}else if(iNow>index){
+				$uli.eq(index).animate({left:0},400);
+				$uli.eq(iNow).animate({left:oneWidth},400);
+			}
+			
+			iNow=index;
+		},this),400);
+	});
+
+
+	
+})
+</script>
+<body>
+	<div class="box">
+		<ul>
+			<li><img src="images/2.jpg"></li>
+			<li><img src="images/3.jpg"></li>
+			<li><img src="images/5.jpg"></li>
+			<li><img src="images/6.jpg"></li>
+			<li><img src="images/7.jpg"></li>
+		</ul>
+		<ol>
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+	</div>
+</body>
+</html>
