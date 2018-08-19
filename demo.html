@@ -30,6 +30,7 @@ $(function(){
 		timer=setTimeout($.proxy(function(){
 			$(this).attr('class','active').siblings().attr('class','');
 			if(iNow<index){
+<<<<<<< HEAD
 				$uli.eq(index).css('left',oneWidth);
 				$uli.eq(iNow).animate({left:-oneWidth},400);
 			}else if(iNow>index){
@@ -37,10 +38,23 @@ $(function(){
 				$uli.eq(iNow).animate({left:oneWidth},400);
 			};
 			$uli.eq(index).animate({left:0},400);
+=======
+				$uli.eq(index).animate({left:0},400);
+				$uli.eq(iNow).animate({left:-oneWidth},400);
+			}else if(iNow>index){
+				$uli.eq(index).animate({left:0},400);
+				$uli.eq(iNow).animate({left:oneWidth},400);
+			}
+			
+>>>>>>> fd13875551b877b2a6c88bb3c3f101422c4c55aa
 			iNow=index;
 		},this),400);
 	});
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd13875551b877b2a6c88bb3c3f101422c4c55aa
 	
 })
 </script>
